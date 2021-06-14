@@ -1,0 +1,38 @@
+package com.company;
+import java.util.Scanner;
+import java.io.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String comm;
+        System.out.println("Введите IPv4-адрес: ");
+        String input = in.nextLine();
+        boolean result=input.matches("((\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.){3}(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])");
+        if(result) {
+            comm = "IP-адрес верный.";
+            System.out.println("IP-адрес верный.");
+        }
+        else{
+            comm = "IP-адрес неверный.";
+            System.out.println("IP-адрес неверный.");
+        }
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("IP-адрес.txt"))){
+            bw.write(input + "\n");
+            bw.write(comm);
+        }
+        catch (IOException ex){
+            System.out.println(ex.getMessage());
+        }
+        System.out.println("Введите кодовое слово 'log' для вывода содержимого текстового файла.");
+        String g = in.nextLine();
+        if (g.equals("log")){
+            try(BufferedReader br = new BufferedReader(new FileReader("IP-адрес.txt"))){
+                String I;
+                while ((I = br.readLine())!= null){
+                    System.out.println(I);
+                }}
+            catch (IOException ex){
+                System.out.println(ex.getMessage());
+            }}}}
